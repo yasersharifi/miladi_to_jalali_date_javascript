@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap Css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Bootstrap Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <!-- Font Vazir CDN -->
+    <link href='https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css' rel='stylesheet' type='text/css'>
+    <!-- Persian Date Picker Css -->
+    <link rel="stylesheet" href="assets/css/persian-datepicker.min.css"/>
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <title>تبدیل تاریخ میلادی به شمسی</title>
+</head>
+<body>
+<main>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center mt-3" style="color: #ff4d07">تبدیل تاریخ میلادی به شمسی</h2>
+                        <hr>
+                        <div class="card border-0">
+                           <div class="card-body">
+                               <div class="row align-center">
+                                   <div class="col-5">
+                                       <label for="miladiDate" class="form-label">تاریخ میلادی</label>
+                                       <input type="date" class="form-control" id="miladiDate">
+                                   </div>
+                                   <div class="col-2 d-flex justify-content-center align-items-end">
+                                       <button class="btn btn-primary __btn-orange" id="miladiToShamsiBtn">
+                                           <span>تبدیل</span>
+                                           <i class="bi bi-arrow-left"></i>
+                                       </button>
+                                   </div>
+                                   <div class="col-5">
+                                       <label for="shamsiDate" class="form-label">تاریخ شمسی</label>
+                                       <input type="text" class="form-control" id="shamsiDate" disabled>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>
+
+                        <h2 class="text-center mt-5" style="color: #ff4d07">تبدیل تاریخ میلادی به شمسی</h2>
+                        <hr>
+                        <div class="card-body">
+                            <div class="card border-0">
+                                <div class="card-body">
+                                    <div class="row align-center">
+                                        <div class="col-5">
+                                            <label for="shamsiDate2" class="form-label">تاریخ شمسی</label>
+                                            <input type="text" class="form-control example1" id="shamsiDate2">
+                                        </div>
+                                        <div class="col-2 d-flex justify-content-center align-items-end">
+                                            <button class="btn btn-primary __btn-orange" id="shamsiToMiladiBtn">
+                                                <span>تبدیل</span>
+                                                <i class="bi bi-arrow-left"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-5">
+                                            <label for="miladiDate2" class="form-label">تاریخ میلادی</label>
+                                            <input type="text" class="form-control" id="miladiDate2" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Bootstrap Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!-- Jquery CDN-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- Persian Date Picker -->
+<script src="assets/js/persian-date.min.js"></script>
+<script src="assets/js/persian-datepicker.min.js"></script>
+<script src="assets/js/init-persian-datapicke.js"></script>
+<!-- Convert Date Library-->
+<script src="assets/js/converter.js"></script>
+<!-- Custom Js -->
+<script>
+    // convert miladi to shmsi
+    let miladiDateElem = document.getElementById("miladiDate");
+    let shamsiDateElem = document.getElementById("shamsiDate");
+    let miladiToShamsiBtn = document.getElementById("miladiToShamsiBtn");
+
+    shamsiDateElem.value = miladiToShamsi(miladiDateElem.value)
+
+
+    miladiToShamsiBtn.addEventListener("click", () => {
+        shamsiDateElem.value = miladiToShamsi(miladiDateElem.value)
+    });
+
+    function miladiToShamsi(miladiDate) {
+        let splitMiladiDate = miladiDate.split("-");
+        let miladiYear = Number(splitMiladiDate[0]);
+        let miladiMonth = Number(splitMiladiDate[1]);
+        let miladiDay = Number(splitMiladiDate[2]);
+
+        let shamsiDate = gregorian_to_jalali(miladiYear, miladiMonth, miladiDay);
+        return  shamsiDate.join("/");
+    }
+
+    // convert shamsi to miladi
+    let miladiDate2Elem = document.getElementById("miladiDate2");
+    let shamsiDate2Elem = document.getElementById("shamsiDate2");
+    let shamsiToMiladiBtnElem = document.getElementById("shamsiToMiladiBtn");
+
+    miladiDate2Elem.value = shamsiToMiladi(shamsiDate2Elem.value);
+
+    shamsiToMiladiBtnElem.addEventListener("click", () => {
+        miladiDate2Elem.value = shamsiToMiladi(shamsiDate2Elem.value);
+    });
+
+    function shamsiToMiladi(shamsiDate) {
+        let shamdsiDateEn = convertNumbers2English(shamsiDate);
+        let splitShamsiDate = shamdsiDateEn.split("/");
+        let shamsiYear = Number(splitShamsiDate[0]);
+        let shamsiMonth = Number(splitShamsiDate[1]);
+        let shamsiDay = Number(splitShamsiDate[2]);
+        let miladiDate = jalali_to_gregorian(shamsiYear, shamsiMonth, shamsiDay);
+        return  miladiDate.join("/");
+    }
+
+    // convert persian number to latin number
+    function convertNumbers2English (string) {
+        return string.replace(/[\u0660-\u0669]/g, function (c) {
+            return c.charCodeAt(0) - 0x0660;
+        }).replace(/[\u06f0-\u06f9]/g, function (c) {
+            return c.charCodeAt(0) - 0x06f0;
+        });
+    }
+</script>
+</body>
+</html>
