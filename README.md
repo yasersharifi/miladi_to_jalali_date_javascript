@@ -1,6 +1,6 @@
 <div dir="rtl">
 <h2>تبدیل تاریخ میلادی به شمسی و برعکس در جاوااسکریپت</h2>
-<img src="https://user-images.githubusercontent.com/79104019/144045865-271b2ed1-1816-4edb-aadd-5eec2b13ae55.png"/>
+<img src="https://user-images.githubusercontent.com/79104019/144045999-33b089ef-6c98-4dfe-8532-eb94fe3e91d2.png"/>
 <h3>نصب برنامه</h3>
 </div>
 
